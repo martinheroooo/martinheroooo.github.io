@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="面试," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1. 加载相关1.1 为什么要强调CSS要放在header里，js放在尾部？ DOMContentLoaded和load：  DOMContentLoaded事件触发时，仅当DOM加载完成，不包括样式表、图片… load事件触发时，页面上所有的DOM，样式表，脚本，图片都已加载完成。    构建Render树需要DOM和CSSOM，所以HTML和CSS都会阻碍渲染，所以需要CSS尽早加载，以缩短首">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面试 | 性能优化">
+<meta property="og:url" content="http://yoursite.com/2021/06/23/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/index.html">
+<meta property="og:site_name" content="martinhero&#39;s blog">
+<meta property="og:description" content="1. 加载相关1.1 为什么要强调CSS要放在header里，js放在尾部？ DOMContentLoaded和load：  DOMContentLoaded事件触发时，仅当DOM加载完成，不包括样式表、图片… load事件触发时，页面上所有的DOM，样式表，脚本，图片都已加载完成。    构建Render树需要DOM和CSSOM，所以HTML和CSS都会阻碍渲染，所以需要CSS尽早加载，以缩短首">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-06-23T13:23:37.000Z">
+<meta property="article:modified_time" content="2021-06-23T13:25:01.837Z">
+<meta property="article:author" content="martinhero">
+<meta property="article:tag" content="面试">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2021/06/23/性能优化/"/>
+
+
+
+
+
+  <title>面试 | 性能优化 | martinhero's blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?4e13a87501f1e443508b48b68db3a217";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="martinhero's blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">martinhero's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/06/23/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="martinhero">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="martinhero's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">面试 | 性能优化</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-06-23T21:23:37+08:00">
+                2021-06-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index">
+                    <span itemprop="name">面试</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2.4k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  8
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-加载相关"><a href="#1-加载相关" class="headerlink" title="1. 加载相关"></a>1. 加载相关</h1><h2 id="1-1-为什么要强调CSS要放在header里，js放在尾部？"><a href="#1-1-为什么要强调CSS要放在header里，js放在尾部？" class="headerlink" title="1.1 为什么要强调CSS要放在header里，js放在尾部？"></a>1.1 为什么要强调CSS要放在header里，js放在尾部？</h2><blockquote>
+<p>DOMContentLoaded和load：</p>
+<ul>
+<li>DOMContentLoaded事件触发时，仅当DOM加载完成，不包括样式表、图片…</li>
+<li>load事件触发时，页面上所有的DOM，样式表，脚本，图片都已加载完成。</li>
+</ul>
+</blockquote>
+<ul>
+<li>构建Render树需要DOM和CSSOM，所以HTML和CSS都会阻碍渲染，所以需要CSS尽早加载，以缩短首次渲染的时间。</li>
+<li>此外，由于CSS不会阻塞文档的解析，但是会阻塞文档渲染，把CSS放在头部可以先生成CSSOM树，后续渲染DOM的时候，可以一次性构建Render树，只需要渲染一次。如果把CSS放在后面，会先解析一次DOM，加载CSS之后，会重新渲染之前的DOM，需要两次渲染。</li>
+<li>阻塞浏览器的解析，也就是说发现一个外链脚本时，需等待脚本下载完成并执行后才会继续解析HTML。</li>
+<li>普通的脚本会阻塞浏览器解析，加上defer或async属性，脚本就变成异步，可等到解析完毕再执行。<ul>
+<li>async异步执行，异步下载完毕后就会执行，不确保执行顺序，一定在onload前，但不确定在DOMContentLoaded事件的前后。</li>
+<li>defer延迟执行，相当于放在body最后，理论上在DOMContentLoaded事件前。</li>
+<li>执行js代码过长会卡住渲染，对于需要很多时间计算的代码可以考虑用Web Worker，它可以让我们另开一个线程执行脚本，不影响渲染。</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-2-Onload-amp-DOMContentLoaded-amp-domready"><a href="#1-2-Onload-amp-DOMContentLoaded-amp-domready" class="headerlink" title="1.2 Onload&amp;DOMContentLoaded&amp;domready"></a>1.2 Onload&amp;DOMContentLoaded&amp;domready</h2><ul>
+<li>DOMContentLoaded事件触发时，仅当<strong>DOM加载完成</strong>，不包括样式表，图片。</li>
+<li>load事件触发时，页面上所有的DOM，样式表，脚本，图片都已加载完。</li>
+<li>domready事件在<strong>DOM加载后、资源加载之前</strong>被触发，在本地浏览器的DOMContentLoaded事件的形式被调用。</li>
+</ul>
+<h1 id="2-白屏、首屏"><a href="#2-白屏、首屏" class="headerlink" title="2. 白屏、首屏"></a>2. 白屏、首屏</h1><h2 id="2-1-白屏"><a href="#2-1-白屏" class="headerlink" title="2.1 白屏"></a>2.1 白屏</h2><ul>
+<li><p>白屏事件指的是浏览器开始显示内容的事件，一般认为浏览器开始渲染body或者解析完head标签的时候就是页面白屏结束的时间。</p>
+</li>
+<li><p>计算方法：</p>
+<ul>
+<li>IE8：title后输出一个时间pagestarttime，head结束前输出一个时间firstpaint。</li>
+<li>白屏时间 = firstpaint - pagestartime / performance.timing.navigationStart</li>
+</ul>
+</li>
+<li><p>优化：</p>
+<ul>
+<li>加快js的执行速度，比如无限滚动的页面，可以用js先渲染一个屏幕范围内的东西。</li>
+<li>减少文件体积。</li>
+<li>首屏同步渲染html，后续的滚屏再异步加载和渲染。</li>
+</ul>
+</li>
+</ul>
+<h1 id="2-2-首屏"><a href="#2-2-首屏" class="headerlink" title="2.2 首屏"></a>2.2 首屏</h1><ul>
+<li><p>首屏时间是指用户打开网站开始，到浏览器首屏内容渲染完成的时间。</p>
+</li>
+<li><p>计算方法：</p>
+<ul>
+<li>模块标签标记。适用于内容不需要拉取数据才能生存以及页面不考虑图片等资源的加载情况。结束位置加时间戳输出时间。</li>
+<li>统计首屏内图片加载最慢时间。通常图片加载最慢，所以会把首屏内加载最慢的图片的时间当作首屏时间。</li>
+<li>自定义计算。（忽略图片等资源加载情况，只考虑页面主要DOM；只考虑首屏的主要模块，而不是严格意义首屏以上的所有内容。）</li>
+</ul>
+</li>
+<li><p>优化：</p>
+<ul>
+<li>首屏数据拉取逻辑放在顶部，数据最快返回。</li>
+<li>首屏渲染css及js逻辑优先内联html，返回时能立即执行。</li>
+<li>次屏逻辑延后执行。</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-3-DOM构建时间"><a href="#2-3-DOM构建时间" class="headerlink" title="2.3 DOM构建时间"></a>2.3 DOM构建时间</h2><p>浏览器开始对基础页文件内容进行解析，构建出一个DOM树的时间。domready事件在DOM加载后、资源加载之前被触发，在本地浏览器的DOMContentLoaded事件的形式被调用。</p>
+<h2 id="2-4-整页时间"><a href="#2-4-整页时间" class="headerlink" title="2.4 整页时间"></a>2.4 整页时间</h2><ul>
+<li>整个页面加载完成时间</li>
+<li>loadEventEnd - navigationStart / onload记录时间戳</li>
+</ul>
+<h1 id="3-渲染相关"><a href="#3-渲染相关" class="headerlink" title="3. 渲染相关"></a>3. 渲染相关</h1><h2 id="3-1-如何减少重绘和回流"><a href="#3-1-如何减少重绘和回流" class="headerlink" title="3.1 如何减少重绘和回流"></a>3.1 如何减少重绘和回流</h2><ul>
+<li>使用transform替代top</li>
+<li>使用visibility替换display: none，前者只会引起重绘，后者会引发回流。</li>
+<li>不使用table布局，很小的一个小改动有可能造成整个table的重新布局。</li>
+<li>CSS选择符从右往左匹配查找，避免节点层级过多，过滤掉一些无关的样式规则和元素。</li>
+<li>将频繁重绘或者回流的节点设置为图层，图层能够阻止该节点的渲染行为影响别的节点。（will-change属性、video和iframe标签等）</li>
+<li>节点属性不要放在一个循环里当循环变量。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//每次都要去取正确的值才行</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">document</span>.querySelector(<span class="string">'.test'</span>).style.offsetTop);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-2-为什么操作DOM的性能很差？"><a href="#3-2-为什么操作DOM的性能很差？" class="headerlink" title="3.2 为什么操作DOM的性能很差？"></a>3.2 为什么操作DOM的性能很差？</h2><ul>
+<li>因为DOM是属于渲染引擎中的东西，而JS又是JS引擎中的东西。当我们通过JS操作DOM的时候，其实这个<strong>操作涉及到了两个线程之间的通信</strong>，那么势必会带来一些性能上的损耗。</li>
+<li>操作DOM次数一多，也就等同于一直在进行线程之间的通信，并且操作DOM<strong>可能还会带来重绘回流</strong>的情况，所以也就导致了性能上的问题。</li>
+</ul>
+<h2 id="3-3-插入-几万个DOM，如何实现页面不卡顿？"><a href="#3-3-插入-几万个DOM，如何实现页面不卡顿？" class="headerlink" title="3.3 插入 几万个DOM，如何实现页面不卡顿？"></a>3.3 插入 几万个DOM，如何实现页面不卡顿？</h2><blockquote>
+<p>关键在于如何分批次部分渲染DOM。</p>
+</blockquote>
+<ul>
+<li>通过requestAnimationFrame的方式去循环的插入DOM。</li>
+<li>通过虚拟滚动。</li>
+</ul>
+<blockquote>
+<p>虚拟滚动原理：只渲染可视区域内的内容，非可见区域的那就完全不渲染了，当用户在滚动的时候就实时去替换渲染的内容。即使列表很长，但是渲染的DOM元素永远只有那么几个，当我们滚动也米娜的时候就会去实时更新DOM。</p>
+</blockquote>
+<h2 id="3-4-不考虑缓存和优化网络协议的前提下，可以通过哪些方式来最快地渲染页面？"><a href="#3-4-不考虑缓存和优化网络协议的前提下，可以通过哪些方式来最快地渲染页面？" class="headerlink" title="3.4 不考虑缓存和优化网络协议的前提下，可以通过哪些方式来最快地渲染页面？"></a>3.4 不考虑缓存和优化网络协议的前提下，可以通过哪些方式来最快地渲染页面？</h2><blockquote>
+<p>减少生成渲染树的时间。渲染树：DOM+CSSDOM。</p>
+</blockquote>
+<ul>
+<li>考虑文件大小。</li>
+<li>script标签使用上考虑async和defer。</li>
+<li>需要下载的内容是否需要在首屏使用。</li>
+<li>CSS、HTML的代码书写。</li>
+</ul>
+<h1 id="4-图片优化"><a href="#4-图片优化" class="headerlink" title="4. 图片优化"></a>4. 图片优化</h1><h2 id="4-1-图片大小如何优化？"><a href="#4-1-图片大小如何优化？" class="headerlink" title="4.1 图片大小如何优化？"></a>4.1 图片大小如何优化？</h2><ul>
+<li>减少像素点。</li>
+<li>减少每个像素点能够显示的颜色。</li>
+</ul>
+<h2 id="4-2-图片加载如何优化？"><a href="#4-2-图片加载如何优化？" class="headerlink" title="4.2 图片加载如何优化？"></a>4.2 图片加载如何优化？</h2><ul>
+<li>用CSS去代替。</li>
+<li>用CDN加载，计算出适配屏幕的宽度，然后去请求相应裁剪好的图片。</li>
+<li>小图使用base64格式。base64编码就是可以将一张图片数据编码成一串字符串，使用该字符串代替图像地址url。</li>
+<li>将多个图标文件整合到一张图片中（精灵图/雪碧图）。</li>
+<li>选择正确的图片格式：<ul>
+<li>尽量使用WebP格式，因为WebP格式具有更好的图像数据压缩算法，能带来更小的图片体积，而且拥有肉眼识别无差异的图片质量。</li>
+<li>小图使用PNG，其实对于大部分图标这类图片，完全可以使用SVG代替。</li>
+<li>照片使用JPEG。</li>
+</ul>
+</li>
+</ul>
+<h1 id="5-防抖、节流"><a href="#5-防抖、节流" class="headerlink" title="5. 防抖、节流"></a>5. 防抖、节流</h1><h2 id="5-1-防抖"><a href="#5-1-防抖" class="headerlink" title="5.1 防抖"></a>5.1 防抖</h2><p>如果在频繁的事件回调中做复杂计算，很有可能导致页面卡顿，不如<strong>将多次计算合并为一次计算，只在一个精确点做操作</strong>。频繁触发，有足够空闲事件才执行。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> debounce = <span class="function">(<span class="params">func, wait = <span class="number">50</span></span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> timer = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">...args</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (timer) &#123;</span><br><span class="line">      clearTimeout(timer);</span><br><span class="line">      timer = setTimeout (<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        func.apply(<span class="keyword">this</span>, args);</span><br><span class="line">      &#125;, wait)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-2-节流"><a href="#5-2-节流" class="headerlink" title="5.2 节流"></a>5.2 节流</h2><p>防抖动是将多次执行变为最后一次执行，节流是将多次执行变成每隔一段事件执行。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttle</span> (<span class="params">func, wait</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> last;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">...args</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> now =+ <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">    <span class="keyword">if</span> (!last || now &gt; last + wait) &#123;</span><br><span class="line">      last = now;</span><br><span class="line">      func.apply(<span class="keyword">this</span>, args);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="6-预渲染"><a href="#6-预渲染" class="headerlink" title="6. 预渲染"></a>6. 预渲染</h1><p>通过预渲染将下载的文件预先在后台渲染，可以使用以下代码开启预渲染。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span> = <span class="string">"prerender"</span> <span class="attr">href</span> = <span class="string">"http://example.com"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>预渲染虽然可以提高页面的加载速度，但是要确保该页面大概率会被用户在之后打开，否则就是白白浪费资源去渲染。</p>
+<h1 id="7-懒执行"><a href="#7-懒执行" class="headerlink" title="7. 懒执行"></a>7. 懒执行</h1><ul>
+<li>懒执行就是<strong>将某些逻辑延迟到使用时再计算</strong>。</li>
+<li>该技术可以用于首屏优化，对于某些耗时逻辑并不需要在首屏就使用的，就可以使用懒执行。</li>
+<li>懒执行需要唤醒，一般可以通过<strong>定时器或者事件的调用</strong>来唤醒。</li>
+</ul>
+<h1 id="8-懒加载"><a href="#8-懒加载" class="headerlink" title="8. 懒加载"></a>8. 懒加载</h1><ul>
+<li>懒加载就是<strong>将不关键的资源延后加载。</strong></li>
+<li>懒加载的原理：只加载自定义区域内需要加载的东西，通常是可视区域，但也可以是即将进入可视区域的区域。</li>
+<li>对于图片来说，先设置图片标签的src属性为一张占位图，将真实的图片资源放入自定义属性中，当进入自定义区域时，就将自定义属性替换为src属性，这一图片就会去下载资源，实现了图片懒加载。</li>
+<li>懒加载不仅可以用于图片，也可以使用在别的资源上。比如进入可视区域才开始播放视频等。</li>
+</ul>
+<h1 id="9-CDN"><a href="#9-CDN" class="headerlink" title="9. CDN"></a>9. CDN</h1><ul>
+<li>CDN的原理：尽可能的在各个地方分布机房缓存数据，这一即使我们的跟服务器远在国外，在国内的用户也可以通过国内的机房迅速加载资源。</li>
+<li>我们可以将静态资源尽量使用CDN加载，由于浏览器对于单个域名有并发请求上限，可以考虑使用多个CDN域名。并且对于CDN加载静态资源需要注意CDN域名要与主站不同，否则每次请求都会带上主站的cookie，平白消耗流量。</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag"># 面试</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/06/02/JavaScript/" rel="next" title="面试 | JavaScript">
+                <i class="fa fa-chevron-left"></i> 面试 | JavaScript
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="martinhero" />
+            
+              <p class="site-author-name" itemprop="name">martinhero</p>
+              <p class="site-description motion-element" itemprop="description">No description.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/martinheroooo" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://instagram.com/yourname" target="_blank" title="Instagram">
+                      
+                        <i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-加载相关"><span class="nav-number">1.</span> <span class="nav-text">1. 加载相关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-为什么要强调CSS要放在header里，js放在尾部？"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 为什么要强调CSS要放在header里，js放在尾部？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-Onload-amp-DOMContentLoaded-amp-domready"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 Onload&amp;DOMContentLoaded&amp;domready</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-白屏、首屏"><span class="nav-number">2.</span> <span class="nav-text">2. 白屏、首屏</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-白屏"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 白屏</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-2-首屏"><span class="nav-number">3.</span> <span class="nav-text">2.2 首屏</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-DOM构建时间"><span class="nav-number">3.1.</span> <span class="nav-text">2.3 DOM构建时间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-整页时间"><span class="nav-number">3.2.</span> <span class="nav-text">2.4 整页时间</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-渲染相关"><span class="nav-number">4.</span> <span class="nav-text">3. 渲染相关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-如何减少重绘和回流"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 如何减少重绘和回流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-为什么操作DOM的性能很差？"><span class="nav-number">4.2.</span> <span class="nav-text">3.2 为什么操作DOM的性能很差？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-插入-几万个DOM，如何实现页面不卡顿？"><span class="nav-number">4.3.</span> <span class="nav-text">3.3 插入 几万个DOM，如何实现页面不卡顿？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-不考虑缓存和优化网络协议的前提下，可以通过哪些方式来最快地渲染页面？"><span class="nav-number">4.4.</span> <span class="nav-text">3.4 不考虑缓存和优化网络协议的前提下，可以通过哪些方式来最快地渲染页面？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-图片优化"><span class="nav-number">5.</span> <span class="nav-text">4. 图片优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-图片大小如何优化？"><span class="nav-number">5.1.</span> <span class="nav-text">4.1 图片大小如何优化？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-图片加载如何优化？"><span class="nav-number">5.2.</span> <span class="nav-text">4.2 图片加载如何优化？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-防抖、节流"><span class="nav-number">6.</span> <span class="nav-text">5. 防抖、节流</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-防抖"><span class="nav-number">6.1.</span> <span class="nav-text">5.1 防抖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-节流"><span class="nav-number">6.2.</span> <span class="nav-text">5.2 节流</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-预渲染"><span class="nav-number">7.</span> <span class="nav-text">6. 预渲染</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-懒执行"><span class="nav-number">8.</span> <span class="nav-text">7. 懒执行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-懒加载"><span class="nav-number">9.</span> <span class="nav-text">8. 懒加载</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-CDN"><span class="nav-number">10.</span> <span class="nav-text">9. CDN</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2020 &mdash; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">martinheroooo</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+  <div class="footer-custom">Hosted by <a target="_blank" href="https://pages.github.com">GitHub Pages</a></div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

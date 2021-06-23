@@ -1,0 +1,1745 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="面试,HTML," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1. Doctype有什么作用 声明文件类型定义（DTD），位于文档中最前面，作用是为了告知浏览器应该用哪种文档类型规范来解析文档。  2. 如何区分严格模式和混杂模式？区分的意义是什么？ 定义： 严格模式（标准模式）：浏览器按照W3C标准来解析 混杂模式：向后兼容的解析方法，浏览器用自己的方式解析代码   如何区分？用DTD来判断： 严格格式DTD——严格模式 有URL的过渡DTD——严格模式，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面试 | HTML">
+<meta property="og:url" content="http://yoursite.com/2021/06/02/HTML/index.html">
+<meta property="og:site_name" content="martinhero&#39;s blog">
+<meta property="og:description" content="1. Doctype有什么作用 声明文件类型定义（DTD），位于文档中最前面，作用是为了告知浏览器应该用哪种文档类型规范来解析文档。  2. 如何区分严格模式和混杂模式？区分的意义是什么？ 定义： 严格模式（标准模式）：浏览器按照W3C标准来解析 混杂模式：向后兼容的解析方法，浏览器用自己的方式解析代码   如何区分？用DTD来判断： 严格格式DTD——严格模式 有URL的过渡DTD——严格模式，">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-06-02T08:04:59.000Z">
+<meta property="article:modified_time" content="2021-06-23T13:24:20.230Z">
+<meta property="article:author" content="martinhero">
+<meta property="article:tag" content="面试">
+<meta property="article:tag" content="HTML">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2021/06/02/HTML/"/>
+
+
+
+
+
+  <title>面试 | HTML | martinhero's blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?4e13a87501f1e443508b48b68db3a217";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="martinhero's blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">martinhero's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/06/02/HTML/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="martinhero">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="martinhero's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">面试 | HTML</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-06-02T16:04:59+08:00">
+                2021-06-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index">
+                    <span itemprop="name">面试</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  3.9k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  14
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-Doctype有什么作用"><a href="#1-Doctype有什么作用" class="headerlink" title="1. Doctype有什么作用"></a>1. Doctype有什么作用</h1><blockquote>
+<p>声明文件类型定义（DTD），位于文档中最前面，作用是<strong>为了告知浏览器应该用哪种文档类型规范来解析文档</strong>。</p>
+</blockquote>
+<h1 id="2-如何区分严格模式和混杂模式？区分的意义是什么？"><a href="#2-如何区分严格模式和混杂模式？区分的意义是什么？" class="headerlink" title="2. 如何区分严格模式和混杂模式？区分的意义是什么？"></a>2. 如何区分严格模式和混杂模式？区分的意义是什么？</h1><ul>
+<li>定义：<ul>
+<li>严格模式（标准模式）：浏览器按照W3C标准来解析</li>
+<li>混杂模式：向后兼容的解析方法，浏览器用自己的方式解析代码</li>
+</ul>
+</li>
+<li>如何区分？用DTD来判断：<ul>
+<li>严格格式DTD——严格模式</li>
+<li>有URL的过渡DTD——严格模式，没有URL的过渡DTD——混杂模式</li>
+<li>DTD不存在/格式不对——混杂模式</li>
+<li>HTML5没有严格和混杂模式之分</li>
+</ul>
+</li>
+<li>区分的意义：严格模式的排版和js运行模式以浏览器支持的最高标准运行，如果只存在严格模式，那么很多旧网站站点无法工作</li>
+</ul>
+<h1 id="3-为什么HTML5只需要写-lt-DOCTYPE-HTML-gt"><a href="#3-为什么HTML5只需要写-lt-DOCTYPE-HTML-gt" class="headerlink" title="3. 为什么HTML5只需要写&lt;!DOCTYPE HTML&gt;"></a>3. 为什么HTML5只需要写<code>&lt;!DOCTYPE HTML&gt;</code></h1><blockquote>
+<p>HTML5不基于SGML（Standard Generalized Markup Language，标准通用标记语言），因此不需要对DTD进行引用，但是需要doctype来规范浏览器的行为</p>
+</blockquote>
+<h1 id="4-meta标签用来做什么？"><a href="#4-meta标签用来做什么？" class="headerlink" title="4. meta标签用来做什么？"></a>4. meta标签用来做什么？</h1><blockquote>
+<p>提供给机器解读的一些元信息（meta-information），如页面搜索引擎优化、定义页面实用语言等；</p>
+<p>标签位于文档的头部，不包含任何内容，其属性定义了与文档相关联的名称/值对;</p>
+<p>所有浏览器都支持meta标签；</p>
+<p>HTML中meta标签没有结束标签；</p>
+<p>XHTML中meta标签必须被正确地关闭；</p>
+<p><strong>meta标签永远位于head元素内部，元数据总是以名称/值的形式被成对传递</strong></p>
+</blockquote>
+<ul>
+<li>http-equi+content<ul>
+<li>charset：编码格式</li>
+<li>expires：过期时间</li>
+<li>refresh：特定时间内自动刷新跳转</li>
+<li>pragma：禁止浏览器从本地计算机缓存中访问页面内容no-cache</li>
+<li>windows-target：设定页面在窗口中以独立页面展示，防止被当成frame页调用</li>
+<li>set-cookie：自定义cookie</li>
+<li>content-type：字符集</li>
+</ul>
+</li>
+<li>name+content<ul>
+<li>keywords：关键字</li>
+<li>description：主要内容</li>
+<li>robots：none不被检索</li>
+<li>author、generator：使用的制作软件</li>
+<li>copyright</li>
+<li>viewport：缩放比例</li>
+</ul>
+</li>
+</ul>
+<h1 id="5-src和href的区别"><a href="#5-src和href的区别" class="headerlink" title="5. src和href的区别"></a>5. src和href的区别</h1><ul>
+<li>href指向网络资源位置，建立当前文档和资源的链接，一般用于<strong>超链接</strong>。</li>
+<li>src将资源嵌入到当前文档中，在请求src资源时会将其指向的资源下载并应用到文档内，例如JS脚本、img图片和frame等元素。<strong>当浏览器解析到该元素时，会暂停其他资源的下载和处理，直到该资源加载、编译、执行完毕，图片和框架等元素也是如此，类似于将所指向资源嵌入当前标签内。</strong>这也是为什么将JS脚本放在底部而不是头部。</li>
+</ul>
+<h1 id="6-Ajax和Flash的优劣对比"><a href="#6-Ajax和Flash的优劣对比" class="headerlink" title="6. Ajax和Flash的优劣对比"></a>6. Ajax和Flash的优劣对比</h1><ul>
+<li>Ajax：<ul>
+<li>优势：<ul>
+<li>可搜索性：<strong>普通的文本网页会更有利于SEO。</strong>文本内容是搜索引擎容易检索的，而繁琐的swf字节码却是搜索引擎不愿触及的。虽然Google等一些大型的搜索引擎可以检索SWF内部的内容，但仍然有很多麻烦存在。</li>
+<li>开放性：Flash常年以来被Macromedia看得很死。包括Flex、FMS等辅佐技术一直都需要昂贵的安装、维护费用，而JS则没有这样的麻烦，没有人愿意承担法律和版权的风险。</li>
+<li>费用：Flash开发是很昂贵的，因为FlashIDE等环境都是要收费的，而Ajax则不同，虽然有一些便宜的生成swf的工具，但它们的功能无法满足复杂要求。</li>
+<li>易用性：Ajax程序有更好的易用性。由于中间有一层Flashplayer代理层，因此许多辅助功能无法被Flash灵活利用。而且Flash在一些方面有着不好的口碑，如广告弹窗、恶意代码等。</li>
+</ul>
+</li>
+<li>劣势：<ul>
+<li>可能破坏浏览器的后退功能。</li>
+<li>使用动态页面更新使得用户难于将某个特定的状态保存到收藏夹中（这些都有相关方法解决）  哪些方法？</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Flash：<ul>
+<li>优势：<ul>
+<li>多媒体处理：Flash在音频、视频等多媒体领域相比HTML有绝对的优势，现在几乎所有的网站都包含有Flash内容。</li>
+<li>兼容性好：由于通过了唯一的Flashplayer代理，不必像调试JS一样在不同的浏览器中调试程序。</li>
+<li>矢量图形：Flash最大的优势，在该领域SVG、Canvas和Direct都不能与Flash相比。</li>
+<li>客户端资源调度：能够更容易地调用浏览器以外的外部资源。如摄像头、麦克风等们这些是普通的HTML无法完成的。</li>
+</ul>
+</li>
+<li>劣势：<ul>
+<li>二进制格式</li>
+<li>格式私有</li>
+<li>Flash文件经常会很大，用户第一次使用的时候需要忍耐较长的等待时间</li>
+<li>性能问题</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="7-HTML5新特点"><a href="#7-HTML5新特点" class="headerlink" title="7. HTML5新特点"></a>7. HTML5新特点</h1><ul>
+<li>Canvas：JS绘图</li>
+<li>draggable属性：可拖动</li>
+<li>geolocationAPI：获取用户地理位置</li>
+<li>audio/video：音频/视频元素</li>
+<li>input类型增多：color、date、datetime、datatime-local、email、month、search、tel、time、url、week</li>
+<li>表单元素增强：datalist与input配合使用规定输入域的选项列表；keygen密钥；output定义不同类的输出</li>
+<li>web存储：sessionStorage针对一个session进行数据存储，关闭浏览器窗口后清除，localStorage没有时间限制，不过可能会因为本地时间修改失效，大量复杂数据结构一般使用indexDB</li>
+<li>Web worker页面中执行脚本时，页面状态不可响应，直到脚本完成。在后台运行，独立于其他脚本，不会影响页面的性能（相当于多进程并发）</li>
+<li>SSE（server-sent-event）：网页自动获取来自服务器的更行，用于接收服务器发送时间通知</li>
+<li>WebSocket：在单个TCP连接上进行全双工通讯的协议。只需要握手一次，形成快速通道，传输数据。客户端和服务器可以直接通过TCP交换数据。获取连接之后，可以用send发送数据，用onmessage接收服务器返回的数据</li>
+<li>新API：History、Command、Application cache……</li>
+</ul>
+<h1 id="8-HTML新的语义-结构元素"><a href="#8-HTML新的语义-结构元素" class="headerlink" title="8. HTML新的语义/结构元素"></a>8. HTML新的语义/结构元素</h1><ul>
+<li><p>新的元素：</p>
+<table>
+<thead>
+<tr>
+<th align="left">标签</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><article></td>
+<td align="left">定义文档内的文章。</td>
+</tr>
+<tr>
+<td align="left"><aside></td>
+<td align="left">定义页面内容之外的内容。</td>
+</tr>
+<tr>
+<td align="left"><bdi></td>
+<td align="left">定义与其他文本不同的文本方向。</td>
+</tr>
+<tr>
+<td align="left"><details></td>
+<td align="left">定义用户可查看或隐藏的额外细节。</td>
+</tr>
+<tr>
+<td align="left"><dialog></td>
+<td align="left">定义对话框或窗口。</td>
+</tr>
+<tr>
+<td align="left"><figcaption></td>
+<td align="left">定义 <figure> 元素的标题。</td>
+</tr>
+<tr>
+<td align="left"><figure></td>
+<td align="left">定义自包含内容，比如图示、图表、照片、代码清单等等。</td>
+</tr>
+<tr>
+<td align="left"><footer></td>
+<td align="left">定义文档或节的页脚。</td>
+</tr>
+<tr>
+<td align="left"><header></td>
+<td align="left">定义文档或节的页眉。</td>
+</tr>
+<tr>
+<td align="left"><main></td>
+<td align="left">定义文档的主内容。</td>
+</tr>
+<tr>
+<td align="left"><mark></td>
+<td align="left">定义重要或强调的内容。</td>
+</tr>
+<tr>
+<td align="left"><menuitem></td>
+<td align="left">定义用户能够从弹出菜单调用的命令/菜单项目。</td>
+</tr>
+<tr>
+<td align="left"><meter></td>
+<td align="left">定义已知范围（尺度）内的标量测量。</td>
+</tr>
+<tr>
+<td align="left"><nav></td>
+<td align="left">定义文档内的导航链接。</td>
+</tr>
+<tr>
+<td align="left"><progress></td>
+<td align="left">定义任务进度。</td>
+</tr>
+<tr>
+<td align="left"><rp></td>
+<td align="left">定义在不支持 ruby 注释的浏览器中显示什么。</td>
+</tr>
+<tr>
+<td align="left"><rt></td>
+<td align="left">定义关于字符的解释/发音（用于东亚字体）。</td>
+</tr>
+<tr>
+<td align="left"><ruby></td>
+<td align="left">定义 ruby 注释（用于东亚字体）。</td>
+</tr>
+<tr>
+<td align="left"><section></td>
+<td align="left">定义文档中的节。</td>
+</tr>
+<tr>
+<td align="left"><summary></td>
+<td align="left">定义 <details> 元素的可见标题。</td>
+</tr>
+<tr>
+<td align="left"><time></td>
+<td align="left">定义日期/时间。</td>
+</tr>
+<tr>
+<td align="left"><wbr></td>
+<td align="left">定义可能的折行（line-break）。</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>新的表单元素：</p>
+<table>
+<thead>
+<tr>
+<th>标签</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><dttalist></td>
+<td>定义输入空间的预定义选项</td>
+</tr>
+<tr>
+<td><keygen></td>
+<td>定义键对生成器字段（用于表单）</td>
+</tr>
+<tr>
+<td><output></td>
+<td>定义计算结果</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>新的输入类型：</p>
+<ul>
+<li>新的输入类型：<ul>
+<li>color</li>
+<li>date</li>
+<li>datetime</li>
+<li>datetime-local</li>
+<li>email</li>
+<li>month</li>
+<li>number</li>
+<li>range</li>
+<li>search</li>
+<li>tel</li>
+<li>time</li>
+<li>url</li>
+<li>week</li>
+</ul>
+</li>
+<li>新的输入属性：<ul>
+<li>autocomplete</li>
+<li>autofocus</li>
+<li>form</li>
+<li>formaction</li>
+<li>formenctype</li>
+<li>formmethod</li>
+<li>formnovalidate</li>
+<li>formtarget</li>
+<li>height 和 width</li>
+<li>list</li>
+<li>min 和 max</li>
+<li>multiple</li>
+<li>pattern (regexp)</li>
+<li>placeholder</li>
+<li>required</li>
+<li>step</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>新的属性语法：</p>
+<blockquote>
+<p>HTML5允许四种不同的属性语法</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="left">标签</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Empty</td>
+<td align="left"><input type="text" value="John Doe" disabled></td>
+</tr>
+<tr>
+<td align="left">Unquoted</td>
+<td align="left"><input type="text" value=John></td>
+</tr>
+<tr>
+<td align="left">Double-quoted</td>
+<td align="left"><input type="text" value="John Doe"></td>
+</tr>
+<tr>
+<td align="left">Single-quoted</td>
+<td align="left"><input type="text" value='John Doe'></td>
+</tr>
+</tbody></table>
+</li>
+<li><p>HTML5图像：</p>
+<table>
+<thead>
+<tr>
+<th align="left">标签</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><canvas></td>
+<td align="left">定义使用 JavaScript 的图像绘制。</td>
+</tr>
+<tr>
+<td align="left"><svg></td>
+<td align="left">定义使用 SVG 的图像绘制。</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>新的媒介元素：</p>
+<table>
+<thead>
+<tr>
+<th align="left">标签</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><audio></td>
+<td align="left">定义声音或音乐内容。</td>
+</tr>
+<tr>
+<td align="left"><embed></td>
+<td align="left">定义外部应用程序的容器（比如插件）。</td>
+</tr>
+<tr>
+<td align="left"><source></td>
+<td align="left">定义 <video> 和 <audio> 的来源。</td>
+</tr>
+<tr>
+<td align="left"><track></td>
+<td align="left">定义 <video> 和 <audio> 的轨道。</td>
+</tr>
+<tr>
+<td align="left"><video></td>
+<td align="left">定义视频或影片内容。</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h1 id="9-什么是shadow-DOM"><a href="#9-什么是shadow-DOM" class="headerlink" title="9. 什么是shadow DOM"></a>9. 什么是shadow DOM</h1><blockquote>
+<p>shadow DOM是浏览器的一种功能，能自动添加子元素，比如radio元素的controls，这些相关元素由浏览器生成</p>
+</blockquote>
+<h1 id="10-Canvas有什么用"><a href="#10-Canvas有什么用" class="headerlink" title="10. Canvas有什么用"></a>10. Canvas有什么用</h1><ul>
+<li><p>相当于在页面上新建了一个画布，可以用JS画图</p>
+</li>
+<li><p>获取DOM，创建画布<code>getContext(&#39;2d&#39;)</code></p>
+<ul>
+<li><p>矩形：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fillRect(x, y, width, height) <span class="comment">//填充</span></span><br><span class="line">strokeRect(x, y, width, height) <span class="comment">//边框</span></span><br><span class="line">clearRect(x, y, width, height) <span class="comment">//清除指定区域</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>路径：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">beginPath() <span class="comment">//新建路径</span></span><br><span class="line">closePath() <span class="comment">//闭合路径</span></span><br><span class="line">stroke() <span class="comment">//描边</span></span><br><span class="line">fill() <span class="comment">//填充</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>移动笔触：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">moveTo(x, y) <span class="comment">//移动到某点</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>绘制直线：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lineTo(x, y) <span class="comment">//从当前位置绘制到(x, y)的一条直线</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>绘制圆：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arc(x, y, radius, startAngle, endAngle, anticlockwise) <span class="comment">//以(x, y)为圆心，radius为半径，stratAngle和endAngle以x轴为准开始结束的弧度，anticlockwise为false为顺时针，true则逆时针</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="11-不改变图片原始大小画到canvas上面"><a href="#11-不改变图片原始大小画到canvas上面" class="headerlink" title="11.  不改变图片原始大小画到canvas上面"></a>11.  不改变图片原始大小画到canvas上面</h1><ul>
+<li><p>第一种，直接在坐标上画图，如果图片大小超出了画布也不缩放<code>drawImage(image,x,y);</code></p>
+</li>
+<li><p>第二种，绘制开始位置，缩放位置，图片会变形<code>drawImage(image,x1,y1,x2,y2);</code></p>
+</li>
+<li><p>第三种，从图片的某个坐标开始截图，截取m*n的大小。然后截的图片从canvas的x1,y1画到x2,y2。<code>drwaImage(image,xi,yi,m,n,x1,y1,x2,y2)</code></p>
+</li>
+</ul>
+<h1 id="12-前端需要注意哪些SEO？"><a href="#12-前端需要注意哪些SEO？" class="headerlink" title="12. 前端需要注意哪些SEO？"></a>12. 前端需要注意哪些SEO？</h1><ul>
+<li>合理的<code>title</code>、<code>description</code>、<code>keywords</code>：搜索对着三项的权重逐个较小，<code>title</code>值强调重点即可，重要关键词出现不要超过2次，而且要靠前，不同页面<code>title</code>要有所不同；<code>description</code>把页面内容高度概括，长度合适，不可过分堆砌关键词，不同页面<code>description</code>有所不同；<code>keywords</code>列举出重要关键词即可</li>
+<li>语义化的<code>HTML</code>代码，符合<code>W3C</code>规范：语义化代码让搜索引擎容易理解网页</li>
+<li>重要内容<code>HTML</code>代码放在最前：搜索引擎抓取HTML顺序是从上到下，有的搜索引擎对抓取长度有限制，保证重要内容一定会被抓取</li>
+<li>重要内容不要用<code>js</code>输出：爬虫不会执行<code>js</code>获取内容</li>
+<li>少用<code>iframe</code>：搜索引擎不会抓取<code>iframe</code>中的内容</li>
+<li>非装饰性图片必须要加<code>alt</code></li>
+<li>提高网站速度：网站速度是搜索引擎排序的一个重要指标</li>
+</ul>
+<h1 id="13-img的title和alt有什么区别"><a href="#13-img的title和alt有什么区别" class="headerlink" title="13. img的title和alt有什么区别"></a>13. img的title和alt有什么区别</h1><ul>
+<li>当鼠标滑动到元素上的时候显示<code>title</code>的内容</li>
+<li>alt是<code>&lt;img&gt;</code>的特有属性，是图片内容的等价描述，用于图片无法加载时显示、读屏器阅读图片；提高图片的可访问性，除了纯装饰性图片都必须设置有意义的值，搜索引擎会重点分析</li>
+</ul>
+<h1 id="14-HTTP的几种请求方法和用途？"><a href="#14-HTTP的几种请求方法和用途？" class="headerlink" title="14. HTTP的几种请求方法和用途？"></a>14. HTTP的几种请求方法和用途？</h1><ul>
+<li><code>GET</code>方法：发送一个请求来<strong>获得</strong>服务器上的某一资源。</li>
+<li><code>POST</code>方法：向URL指定的资源<strong>提交</strong>数据或附加新的数据。</li>
+<li><code>PUT</code>方法：跟<code>POST</code>方法很像，也是向服务器提交数据。<code>PUT</code>指定了资源在服务器上的位置，而<code>POST</code>没有。</li>
+<li><code>HEAD</code>方法：只请求服务器上的某资源。</li>
+<li><code>OPTION</code>方法：用于获取当前URL所支持的方法。如果请求成功，会有一个<code>ALLOW</code>的头包含类似<code>GET/POST</code>的信息。</li>
+<li><code>TRACE</code>方法：被用于激发一个远程的、应用层的请求消息回路。</li>
+<li><code>CONNECT</code>方法：把请求连接转换到透明的<code>TCP/IP</code>通道。</li>
+</ul>
+<h1 id="15-从浏览器地址栏输入url到显示页面的步骤-待完善"><a href="#15-从浏览器地址栏输入url到显示页面的步骤-待完善" class="headerlink" title="15. 从浏览器地址栏输入url到显示页面的步骤  待完善"></a>15. 从浏览器地址栏输入url到显示页面的步骤  待完善</h1><h1 id="16-如何进行网站性能优化？-继续完善"><a href="#16-如何进行网站性能优化？-继续完善" class="headerlink" title="16. 如何进行网站性能优化？  继续完善"></a>16. 如何进行网站性能优化？  继续完善</h1><ul>
+<li>content方面：<ul>
+<li>减少HTTP请求：合并文件、CSS精灵、<code>inline Image</code></li>
+<li>减少DNS查询：DNS缓存、将资源分布到恰当数量的主机名</li>
+<li>减少DOM元素数量</li>
+</ul>
+</li>
+<li>Server方面：<ul>
+<li>使用CDN</li>
+<li>配置ETag</li>
+<li>对组件使用Gzip压缩</li>
+</ul>
+</li>
+<li>Cookie方面：减小cookie大小</li>
+<li>CSS方面：<ul>
+<li>将样式表放到页面顶部</li>
+<li>不使用CSS表达式</li>
+<li>使用<code>&lt;link&gt;</code>不使用<code>@import</code></li>
+</ul>
+</li>
+<li>JavaScript方面：<ul>
+<li>将脚本放到页面底部</li>
+<li>将JavaScript和CSS从外部引入</li>
+<li>压缩JavaScript和CSS</li>
+<li>删除不需要的脚本</li>
+<li>减少DOM访问</li>
+</ul>
+</li>
+<li>图片方面：<ul>
+<li>优化图片：根据实际颜色需要选择色深、压缩</li>
+<li>优化CSS精灵</li>
+<li>不要再HTML中拉伸图片</li>
+</ul>
+</li>
+</ul>
+<h1 id="17-HTTP状态码及其含义"><a href="#17-HTTP状态码及其含义" class="headerlink" title="17.HTTP状态码及其含义"></a>17.HTTP状态码及其含义</h1><ul>
+<li><code>1XX</code>：信息状态码<ul>
+<li><code>100 Continue</code>：继续。一般在发送POST请求时，已发送了<code>http header</code>之后服务端将返回此信息，表示确认，之后发送具体参数信息。</li>
+</ul>
+</li>
+<li><code>2XX</code>：成功状态码<ul>
+<li><code>200 OK</code>：正常返回信息。</li>
+<li><code>201 Created</code>：请求成功并且服务器创建了新的资源。</li>
+<li><code>202 Accepted</code>：服务器已接收请求，但<strong>尚未处理。</strong></li>
+</ul>
+</li>
+<li><code>3XX</code>：重定向<ul>
+<li><code>301 Moved Permanently</code>：请求的网页已永久移动到新位置。</li>
+<li><code>302 Found</code>：临时性重定向。</li>
+<li><code>303 See Other</code>：临时性重定向，且总是使用GET请求新的URI（用于标识互联网资源名称的字符串）。</li>
+<li><code>304 Not Modified</code>：自从上次请求后，请求的网页未修改过。</li>
+</ul>
+</li>
+<li><code>4XX</code>：客户端错误<ul>
+<li><code>400 Bad Request</code>：服务器无法理解请求的格式，客户端不应当尝试再次使用相同的内容发起请求。</li>
+<li><code>401 Unauthorized</code>：请求未授权。</li>
+<li><code>403 Forbidden</code>：禁止访问。</li>
+<li><code>404 Not Found</code>：找不到任何与URI相匹配的资源。</li>
+</ul>
+</li>
+<li><code>5XX</code>：服务器错误<ul>
+<li><code>500 Internal Server Error</code>：最常见的客户端错误。</li>
+<li><code>503 Service Unavailable</code>：服务端暂时无法处理请求（过载或维护）。</li>
+</ul>
+</li>
+</ul>
+<h1 id="18-语义化的理解"><a href="#18-语义化的理解" class="headerlink" title="18. 语义化的理解"></a>18. 语义化的理解</h1><h1 id="19-浏览器内核的理解"><a href="#19-浏览器内核的理解" class="headerlink" title="19. 浏览器内核的理解"></a>19. 浏览器内核的理解</h1><blockquote>
+<p>主要分成两部分：渲染引擎（layout engineer或Rendering Engine）和JS引擎。</p>
+</blockquote>
+<ul>
+<li>渲染引擎：<ul>
+<li>负责取得网页的内容（HTML、XML、图像等等）、整理讯息（例如加入CSS等），以及计算网页的显示方式，输出至显示器或打印机。</li>
+<li>浏览器的内核的不同对于网页的语法解释会有不同，所以渲染的效果也不相同。</li>
+<li>所有网页浏览器、电子邮件客户端以及其他需要编辑、显示网络内容的应用程序都需要内核。</li>
+</ul>
+</li>
+<li>JS引擎：解析和执行JavaScript来实现网页的动态效果。</li>
+<li>最开始渲染引擎和JS引擎并没有区分的很明确，后来JS引擎越来越独立，内核就倾向于只指渲染引擎。</li>
+<li>常见的浏览器内核：<ul>
+<li>Trident内核：IE、MaxThon、TT、The World，360，搜狗浏览器等（又称MSHTML）。</li>
+<li>Gecko内核：Netscape6及以上版本，FF/MozillaSuite/SeaMonkey等。</li>
+<li>Presto内核：Opera7及以上（Opera内核原为Presto，现为Blink）。</li>
+<li>Webkit内核：Safari、Chrome等（Chrome的Blink是webkit的分支）。</li>
+</ul>
+</li>
+</ul>
+<h1 id="20-HTML新特性？移除元素？"><a href="#20-HTML新特性？移除元素？" class="headerlink" title="20. HTML新特性？移除元素？"></a>20. HTML新特性？移除元素？</h1><ul>
+<li>新特性：<ul>
+<li>新增选择器：<code>document.querytSlector</code>、<code>document.querySelectorAll</code></li>
+<li>拖拽释放：drag and drop API</li>
+<li>媒体播放：video和audio</li>
+<li>本地存储：localStorage和sessionStorage</li>
+<li>离线应用：manifest</li>
+<li>桌面通知：Notifications</li>
+<li>语义化标签：article、footer、header、nav、section</li>
+<li>增强表单空间：calendar、date、time、email、url、search</li>
+<li>地理位置：Geolocation</li>
+<li>多任务：webworker</li>
+<li>全双工通信协议：websocket</li>
+<li>历史管理：history</li>
+<li>跨域资源共享（CORS）：Access-Control-Allow-Origin</li>
+<li>页面可见性改变事件：visibilitychange</li>
+<li>跨窗口通信：PostMessage</li>
+<li>Form Data对象</li>
+<li>绘画canvas</li>
+</ul>
+</li>
+<li>移除元素：<ul>
+<li>纯表现的元素：basefont、big、center、font、s、strike、tt、u</li>
+<li>对可用性产生负面影响的元素：frame、frameset、noframes</li>
+</ul>
+</li>
+<li>支持HTML5新标签：<ul>
+<li><code>IE8/IE7/IE6</code>支持通过<code>document.createElement</code>方法产生的标签。</li>
+<li>可以利用这一特性让这些浏览器支持<code>HTML5</code>新标签。</li>
+<li>浏览器支持新标签后，还需要添加标签默认的样式。</li>
+<li>html5shim：让 IE 识别并支持 HTML5 元素。</li>
+</ul>
+</li>
+<li>如何区分HTML和HTML5：<code>DOCTYPE声明</code>、新增的结构元素、功能元素。</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag"># 面试</a>
+          
+            <a href="/tags/HTML/" rel="tag"># HTML</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/06/02/CSS/" rel="next" title="面试 | CSS">
+                <i class="fa fa-chevron-left"></i> 面试 | CSS
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/06/02/JavaScript/" rel="prev" title="面试 | JavaScript">
+                面试 | JavaScript <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="martinhero" />
+            
+              <p class="site-author-name" itemprop="name">martinhero</p>
+              <p class="site-description motion-element" itemprop="description">No description.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/martinheroooo" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://instagram.com/yourname" target="_blank" title="Instagram">
+                      
+                        <i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Doctype有什么作用"><span class="nav-number">1.</span> <span class="nav-text">1. Doctype有什么作用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-如何区分严格模式和混杂模式？区分的意义是什么？"><span class="nav-number">2.</span> <span class="nav-text">2. 如何区分严格模式和混杂模式？区分的意义是什么？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-为什么HTML5只需要写-lt-DOCTYPE-HTML-gt"><span class="nav-number">3.</span> <span class="nav-text">3. 为什么HTML5只需要写&lt;!DOCTYPE HTML&gt;</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-meta标签用来做什么？"><span class="nav-number">4.</span> <span class="nav-text">4. meta标签用来做什么？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-src和href的区别"><span class="nav-number">5.</span> <span class="nav-text">5. src和href的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-Ajax和Flash的优劣对比"><span class="nav-number">6.</span> <span class="nav-text">6. Ajax和Flash的优劣对比</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-HTML5新特点"><span class="nav-number">7.</span> <span class="nav-text">7. HTML5新特点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-HTML新的语义-结构元素"><span class="nav-number">8.</span> <span class="nav-text">8. HTML新的语义&#x2F;结构元素</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-什么是shadow-DOM"><span class="nav-number">9.</span> <span class="nav-text">9. 什么是shadow DOM</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-Canvas有什么用"><span class="nav-number">10.</span> <span class="nav-text">10. Canvas有什么用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#11-不改变图片原始大小画到canvas上面"><span class="nav-number">11.</span> <span class="nav-text">11.  不改变图片原始大小画到canvas上面</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#12-前端需要注意哪些SEO？"><span class="nav-number">12.</span> <span class="nav-text">12. 前端需要注意哪些SEO？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#13-img的title和alt有什么区别"><span class="nav-number">13.</span> <span class="nav-text">13. img的title和alt有什么区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#14-HTTP的几种请求方法和用途？"><span class="nav-number">14.</span> <span class="nav-text">14. HTTP的几种请求方法和用途？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#15-从浏览器地址栏输入url到显示页面的步骤-待完善"><span class="nav-number">15.</span> <span class="nav-text">15. 从浏览器地址栏输入url到显示页面的步骤  待完善</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#16-如何进行网站性能优化？-继续完善"><span class="nav-number">16.</span> <span class="nav-text">16. 如何进行网站性能优化？  继续完善</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#17-HTTP状态码及其含义"><span class="nav-number">17.</span> <span class="nav-text">17.HTTP状态码及其含义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#18-语义化的理解"><span class="nav-number">18.</span> <span class="nav-text">18. 语义化的理解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#19-浏览器内核的理解"><span class="nav-number">19.</span> <span class="nav-text">19. 浏览器内核的理解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#20-HTML新特性？移除元素？"><span class="nav-number">20.</span> <span class="nav-text">20. HTML新特性？移除元素？</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2020 &mdash; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">martinheroooo</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+  <div class="footer-custom">Hosted by <a target="_blank" href="https://pages.github.com">GitHub Pages</a></div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
