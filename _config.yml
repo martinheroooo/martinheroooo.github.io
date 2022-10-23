@@ -102,6 +102,6 @@ theme: next
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: "git"
-  repo: "https://github.com/martinheroooo/martinheroooo.github.io"
+  type: git
+  repo: https://github.com/martinheroooo/martinheroooo.github.io.git
   branch: master
